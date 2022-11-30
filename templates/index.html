@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Projects - Brand</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <style type="text/css">
+        #viz {
+            width: 600px;
+            height: 600px;
+            border: 1px solid lightgray;
+            font: 22pt arial;
+        }
+
+        li {
+            overflow-wrap: break-word;
+        }
+
+    </style>
+    <script type="text/javascript" src="{{url_for('static', filename='/node_modules/neovis.js/dist/neovis.js')}}"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+            
+    <script type="text/javascript" src="{{url_for('static', filename='/js/neo4j.js')}}"></script>
+</head>
+
+<body>
+    <section class="py-5" style="background: url(&quot;./static/img/785.jpg&quot;) center / cover no-repeat;"></section>    
+    <div class="container text-center d-grid gap-2"><a href="/" class="btn btn-primary" ><i class="bi bi-house align-top" ></i> | Home</a></div> 
+    <section style="margin-top: 44px;">
+        <div class="container">
+            <form method="get" action="/protein">
+                <div class="row">
+                    <div class="col-6">
+                    <input class="form-control mb-2 mr-sm-2" type="text" name="search" id="searchProt">
+                    </div>
+                    <div class="form-check col-1">
+                        <input class="form-check-input" type="radio" name="entryOrEntryName" value="entry" checked>
+                        <label class="form-check-label" for="entryRadio">Entry</label>
+                    </div>
+                    <div class="form-check col-1">
+                        <input class="form-check-input" type="radio" name="entryOrEntryName" value="entryName">
+                        <label class="form-check-label" for="entryNameRadio">Entry Name</label>
+                    </div>
+                    <div class="range col-2 text-center">
+                        <input type="range" class="form-range" min="0.3" max="0.99" step="0.01" name="jaccard" id="customRange1" oninput="this.nextElementSibling.value = this.value"/>
+                        <output>0.65</output>
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-primary" type="submit" >Trouve</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="container">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                    <th scope="col">Statistiques</th>
+                    <th scope="col">Nombres</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <th scope="row">Protéines Labelé</th>
+                    <td>{{nbLabel}}</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">Protéines non-labelé</th>
+                    <td>{{nbNonLabel}}</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">Protéines sans voisins</th>
+                    <td>{{nbNonVoisin}}</td>
+                    </tr>
+                </tbody>
+                </table>
+        </div>
+    </section>
+    
+    <script src="{{url_for('static', filename='/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='/js/bold-and-dark.js')}}"></script>
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Projects - Brand</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <style type="text/css">
+        #viz {
+            width: 700px;
+            height: 700px;
+            border: 1px solid lightgray;
+            font: 22pt arial;
+        }
+
+        li {
+            overflow-wrap: break-word;
+        }
+
+    </style>
+    <script type="text/javascript" src="{{url_for('static', filename='/node_modules/neovis.js/dist/neovis.js')}}"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+            
+    <script>
+        var entry = '{{protein["Entry"]}}';
+        var j = '{{jaccard}}';
+        var voisin = '{{voisin}}';
+    </script>
+    <script type="text/javascript" src="{{url_for('static', filename='/js/neo4j.js')}}"></script>
+</head>
+
+<body onload="draw()">
+    <section class="py-5" style="background: url(&quot;./static/img/785.jpg&quot;) center / cover no-repeat;"></section>   
+    <div class="container text-center d-grid gap-2"><a href="/" class="btn btn-primary" ><i class="bi bi-house align-top" ></i> | Home</a></div> 
+    
+    <section style="margin-top: 44px;">
+        <div class="container">
+            <form method="get" action="/protein">
+                <div class="row">
+                    <div class="col-6">
+                        <input class="form-control mb-2 mr-sm-2" type="text" name="search" id="searchProt" required>
+                    </div>
+                    <div class="form-check col-1">
+                        <input class="form-check-input" type="radio" name="entryOrEntryName" value="entry" checked>
+                        <label class="form-check-label" for="entryRadio">Entry</label>
+                    </div>
+                    <div class="form-check col-1">
+                        <input class="form-check-input" type="radio" name="entryOrEntryName" value="entryName">
+                        <label class="form-check-label" for="entryNameRadio">Entry Name</label>
+                    </div>
+                    <div class="range col-2 text-center">
+                        <input type="range" class="form-range" min="0.3" max="0.99" step="0.01" name="jaccard" id="customRange1" oninput="this.nextElementSibling.value = this.value"/>
+                        <output>0.65</output>
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-primary" type="submit" >Trouve</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        
+        <div class="container py-5">
+            <div class="row row-cols-1 row-cols-md-2 mx-auto">
+                <div class="col mb-6">
+                    <div><a href="#"></a>
+                        <div class="py-4"><span class="badge bg-primary mb-2">MongoDB</span>
+                            <h4 class="fw-bold">{{protein['Protein names']}}</h4>
+                            <ul class="list-group">
+                                {% for key, value in protein.items() %}
+                                <li class="list-group-item"> {{key}} : {{value}} </li>
+                                {% endfor %}
+                            </ul>
+                            <!--<p class="text-muted">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-6">
+                    <div><a href="#"></a>
+                        <div class="py-4"><span class="badge bg-primary mb-2">Neo4J</span>
+                            <h4 class="fw-bold">{{protein['Protein names']}}</h4>
+                            <div class="text-center"><h5>{{nbVoisin}} Proteines voisines</h5></div>
+                            <div id="viz"></div>
+                                                      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="{{url_for('static', filename='/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='/js/bold-and-dark.js')}}"></script>
+</body>
+
+</html>
