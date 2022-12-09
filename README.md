@@ -1,3 +1,8 @@
+### Membres du projet :
+- LEBRETON Baptiste;
+- RIVIERE Mickael;
+- SAMSON Ulrik.
+
 # Comment utiliser notre projet
 
 Voici les étapes à suivre afin de lancer notre projet. Bien entendu, la première phase, à savoir ********Importation et prétraitement********, n’est pas à réaliser à chaque lancement, mais uniquement lors du premier lancement.
